@@ -14,8 +14,10 @@ class WikiImageItem extends StatefulWidget {
 class _WikiImageItemState extends State<WikiImageItem> {
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-        imageUrl: widget._imageURL,
-        errorWidget: (context, url, error) => Icon(Icons.error));
+    return Padding(
+      padding: EdgeInsets.only(right: 4),
+        child: CachedNetworkImage(
+            imageUrl: widget._imageURL,
+            errorWidget: (context, url, error) => Icon(Icons.error)));
   }
 }

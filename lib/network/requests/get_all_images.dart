@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_wiki_search_app/model/wiki_image.dart';
 import 'package:flutter_wiki_search_app/network/exception/wiki_server_exception.dart';
+import 'package:path/path.dart';
 
 import '../dio_http_client.dart';
 
@@ -32,7 +33,7 @@ Map<String, dynamic> getParams(String text) {
   map['aifrom'] = '$text';
   map['format'] = 'json';
   map['list'] = 'allimages';
-  map['ailimit'] = '10';
+  map['ailimit'] = '20';
 
   return map;
 }
@@ -42,7 +43,13 @@ List<WikiImage> parseResponse(Response<dynamic> queryResponse) {
 
   List<dynamic> imagesJOSN = queryJSON['allimages'];
 
-  return imagesJOSN.map((dynamic imageJSON) {
-    return WikiImage.fromJson(imageJSON);
-  }).toList();
+  List<WikiImage> images = [];
+  for (Map<String, dynamic> imageJSON in imagesJOSN) {
+    String fileExtension = extension(imageJSON['url']);
+
+    if (fileExtension == '.jpg' || fileExtension == '.png') {
+      images.add(WikiImage.fromJson(imageJSON));
+    }
+  }
+  return images;
 }

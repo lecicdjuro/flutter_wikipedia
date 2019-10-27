@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +23,13 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back_ios,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+          ),
+          onPressed: () {
+            closeApp();
+          },
         ),
         title: Text('Search Wikipedia'),
         actions: <Widget>[
@@ -41,5 +48,9 @@ class _SearchPageState extends State<SearchPage> {
         child: CachedNetworkImage(imageUrl: wikipediaLogoPlaceHolder),
       ),
     );
+  }
+
+  void closeApp() {
+    exit(0);
   }
 }
