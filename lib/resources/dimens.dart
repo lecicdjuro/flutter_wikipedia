@@ -8,6 +8,7 @@ const double veryLargeText = 20.0;
 const double smallPadding = 4;
 const double mediumPadding = 8;
 const double largePadding = 16;
+const double veryLargePadding = 32;
 
 const double underlineHeight = 1;
 
