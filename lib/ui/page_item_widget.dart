@@ -15,6 +15,7 @@ class PageItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         GestureDetector(
             onTap: () {
@@ -25,32 +26,29 @@ class PageItemWidget extends StatelessWidget {
                           WikiWebViewScreen(page.title, page.getPageUrl())));
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   getText(page),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(page.getPageUrl(), style: TextStyle(color: Colors.grey))
               ],
             )),
         Card(
-            child: Padding(
-                padding: EdgeInsets.all(dimens.mediumPadding),
-                child: SizedBox(
-                  height: dimens.pageHeight,
-                  child: page.images.isNotEmpty
-                      ? ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: page.images?.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Card(
-                            child:
-                                WikiImageItem(page.images.elementAt(index).url),
-                          ),
-                        )
-                      : WikiImageItem(noImagePlaceholder),
-                ))),
+            child: SizedBox(
+          height: dimens.pageHeight,
+          child: page.images.isNotEmpty
+              ? ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: page.images?.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      WikiImageItem(page.images.elementAt(index).url),
+                )
+              : WikiImageItem(noImagePlaceholder),
+        )),
         Divider()
       ],
     );

@@ -44,6 +44,7 @@ class PageSearchDelegate extends SearchDelegate<Page> {
 
         return state.pages.length > 0
             ? ListView.builder(
+                padding: EdgeInsets.all(dimens.largePadding),
                 itemBuilder: (context, index) {
                   Page page = state.pages.elementAt(index);
                   return PageItemWidget(page);
