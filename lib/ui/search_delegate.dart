@@ -38,8 +38,8 @@ class PageSearchDelegate extends SearchDelegate<Page> {
             child: CircularProgressIndicator(),
           );
         }
-        if (state.hasError) {
-          return WikiErrorWidget();
+        if (state.wikiError != null) {
+          return WikiErrorWidget(state.wikiError.getError(context));
         }
 
         return state.pages.length > 0

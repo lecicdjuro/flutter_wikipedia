@@ -38,13 +38,13 @@ Map<String, dynamic> getParams(String text) {
 
 List<Page> parseResponse(Response<dynamic> queryResponse) {
   List<dynamic> titles = queryResponse.data[1];
-  List<dynamic> descripitons = queryResponse.data[2];
+  List<dynamic> description = queryResponse.data[2];
   List<dynamic> links = queryResponse.data[3];
   List<Page> pages = [];
   for (int i = 0; i < titles.length; i++) {
     pages.add(Page(
         title: titles.elementAt(i),
-        description: descripitons.elementAt(i),
+        description: description.elementAt(i),
         pageUrl: links.elementAt(i)));
   }
   return pages;

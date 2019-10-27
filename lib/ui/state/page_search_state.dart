@@ -1,17 +1,17 @@
 import 'package:flutter_wiki_search_app/model/wiki_page.dart';
+import 'package:flutter_wiki_search_app/network/exception/base_exception.dart';
 
 class PageSearchState {
   final bool isLoading;
   final List<Page> pages;
-  final bool hasError;
+  final BaseException wikiError;
 
-  const PageSearchState({this.isLoading, this.pages, this.hasError});
+  const PageSearchState({this.isLoading, this.pages, this.wikiError});
 
   factory PageSearchState.initial() {
     return PageSearchState(
       pages: [],
       isLoading: false,
-      hasError: false,
     );
   }
 
@@ -19,7 +19,6 @@ class PageSearchState {
     return PageSearchState(
       pages: [],
       isLoading: true,
-      hasError: false,
     );
   }
 
@@ -27,19 +26,18 @@ class PageSearchState {
     return PageSearchState(
       pages: pages,
       isLoading: false,
-      hasError: false,
     );
   }
 
-  factory PageSearchState.error() {
+  factory PageSearchState.error(BaseException exception) {
     return PageSearchState(
       pages: [],
       isLoading: false,
-      hasError: true,
+      wikiError: exception,
     );
   }
 
   @override
   String toString() =>
-      'Pages {wiki: ${pages.toString()}, isLoading: $isLoading, hasError: $hasError }';
+      'Pages {wiki: ${pages.toString()}, isLoading: $isLoading, hasError: $wikiError }';
 }
